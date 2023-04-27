@@ -126,9 +126,9 @@ const  Header = () =>{
        })
    }
     const login = () =>{
-        // window.open('https://discord.com/oauth2/authorize?client_id=1085234510649622548&redirect_uri=https%3A%2F%2Fnavigation-sepia.vercel.app%2F&response_type=code&scope=identify%20guilds',"_parent")
+        window.open('https://discord.com/oauth2/authorize?client_id=1085234510649622548&redirect_uri=https%3A%2F%2Fnavigation-sepia.vercel.app%2F&response_type=code&scope=identify%20guilds',"_parent")
 
-        window.open('https://discord.com/oauth2/authorize?client_id=1085234510649622548&redirect_uri=http%3A%2F%2Flocalhost%3A3005%2F&response_type=code&scope=identify%20guilds',"_parent")
+        // window.open('https://discord.com/oauth2/authorize?client_id=1085234510649622548&redirect_uri=http%3A%2F%2Flocalhost%3A3005%2F&response_type=code&scope=identify%20guilds',"_parent")
     }
     const signOut = () =>{
         setUserInfo(OPTIONS)
