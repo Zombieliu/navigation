@@ -69,12 +69,12 @@ const  Header = () =>{
             setScroll(false)
         }
     };
-
+    const { pathname, query, asPath } = router
     useEffect(()=>{
         if (router.isReady) {
             setOpenLoading(true)
             let code = router.query.code
-            const query = async () =>{
+            const queryData = async () =>{
                 if(discordUser.username ==''){
                     const ret = await client.callApi('v1/User/GetDcUserToken', {
                         code:`${code}`
@@ -89,7 +89,7 @@ const  Header = () =>{
                         setDiscordUser({id:data.id,username:data.username,avatar:data.avatar})
                         setUserInfo({id:data.id,username:data.username,avatar:data.avatar})
                         setOpenLoading(false)
-                        router.push('')
+                        router.push({ pathname, query })
 
                     }
                 }else{
@@ -103,7 +103,7 @@ const  Header = () =>{
                     setDiscordUser(OPTIONS)
                 }
             }
-            query()
+            queryData()
         }
     },[router.isReady])
     const to = (toEl)=>{

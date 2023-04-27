@@ -254,7 +254,7 @@ export async function getStaticPaths() {
     const project_details = JSON.parse(result.res.project_details)
     const paths = project_details.map((project: any)=>{
         return {
-            params:{id:project.properties.ID.rich_text[0].plain_text}
+            params:{id:project.id}
         }
     })
     return {
