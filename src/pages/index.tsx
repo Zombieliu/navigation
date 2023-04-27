@@ -6,7 +6,7 @@ const IndexPage: NextPage = (props) => {
     const router = useRouter()
   return (
       <main>
-       <Home data ={props}/>
+       <Home props ={props}/>
       </main>
   )
 }

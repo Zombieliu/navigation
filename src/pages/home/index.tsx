@@ -53,14 +53,14 @@ const Game = (props) =>{
     )
 }
 
-const Home = (props) =>{
+const Home = (data) =>{
     return (
         <div className="bg-[#0B0B0B] ">
 
             <Header/>
 
             <div className="pt-24">
-                <Game data = {props.data.project_details}/>
+                <Game data = {data.props?.project_details}/>
 
 
 
