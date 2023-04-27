@@ -44,7 +44,7 @@ const  Header = () =>{
     const router = useRouter()
     const [scroll,setScroll]=useState(false)
     const [,setOpenLoading] =useAtom(LoadingState)
-    const [user_id,setUser_id] = useAtom(USER_ID)
+    const [userId,setUser_id] = useAtom(USER_ID)
     const [discordUser,setDiscordUser] =useAtom(DiscordUser)
     const OPTIONS = {id:"",username:"", avatar:""};
     const [userInfo,setUserInfo] = useState(OPTIONS)
@@ -71,12 +71,15 @@ const  Header = () =>{
     };
     const { pathname, query, asPath } = router
     useEffect(()=>{
+
         if (router.isReady) {
-            setOpenLoading(true)
+            console.log("sss")
+            // setOpenLoading(true)
             let code = router.query.code
+
             const queryData = async () =>{
                 if(discordUser.username ==''){
-                    const ret = await client.callApi('v1/User/GetDcUserToken', {
+                    const ret = await client.callApi('v1/User/GetDcNavUserToken', {
                         code:`${code}`
                     });
                     if(ret.isSucc){
@@ -86,17 +89,19 @@ const  Header = () =>{
                             user_id
                         });
                         const data = JSON.parse(userInfoRet.res.user_info)
+
                         setDiscordUser({id:data.id,username:data.username,avatar:data.avatar})
                         setUserInfo({id:data.id,username:data.username,avatar:data.avatar})
-                        setOpenLoading(false)
-                        router.push({ pathname, query })
+                        // setOpenLoading(false)
+                        // router.push({ pathname, query })
 
                     }
                 }else{
                     setUserInfo(discordUser)
                 }
+                console.log()
                 const userInfoRet = await client.callApi('v1/User/GetDcUserInfo', {
-                    user_id
+                    user_id:userId
                 });
                 if(!userInfoRet.isSucc){
                     setUserInfo(OPTIONS)
@@ -121,9 +126,9 @@ const  Header = () =>{
        })
    }
     const login = () =>{
-        window.open('https://discord.com/oauth2/authorize?client_id=1085234510649622548&redirect_uri=https%3A%2F%2Fnavigation-sepia.vercel.app%2F&response_type=code&scope=identify%20guilds',"_parent")
+        // window.open('https://discord.com/oauth2/authorize?client_id=1085234510649622548&redirect_uri=https%3A%2F%2Fnavigation-sepia.vercel.app%2F&response_type=code&scope=identify%20guilds',"_parent")
 
-        // window.open('https://discord.com/oauth2/authorize?client_id=1085234510649622548&redirect_uri=http%3A%2F%2Flocalhost%3A3005%2F&response_type=code&scope=identify%20guilds',"_parent")
+        window.open('https://discord.com/oauth2/authorize?client_id=1085234510649622548&redirect_uri=http%3A%2F%2Flocalhost%3A3005%2F&response_type=code&scope=identify%20guilds',"_parent")
     }
     const signOut = () =>{
         setUserInfo(OPTIONS)

@@ -7,6 +7,7 @@ import { ReqAddDcUserTestRules, ResAddDcUserTestRules } from './v1/Test/PtlAddDc
 import { ReqAddDcUserTestRulesNumber, ResAddDcUserTestRulesNumber } from './v1/Test/PtlAddDcUserTestRulesNumber';
 import { ReqGetDcUserTestRules, ResGetDcUserTestRules } from './v1/Test/PtlGetDcUserTestRules';
 import { ReqGetDcUserTestRulesNumber, ResGetDcUserTestRulesNumber } from './v1/Test/PtlGetDcUserTestRulesNumber';
+import { ReqGetDcNavUserToken, ResGetDcNavUserToken } from './v1/User/PtlGetDcNavUserToken';
 import { ReqGetDcUserAllGuilds, ResGetDcUserAllGuilds } from './v1/User/PtlGetDcUserAllGuilds';
 import { ReqGetDcUserGuildInfo, ResGetDcUserGuildInfo } from './v1/User/PtlGetDcUserGuildInfo';
 import { ReqGetDcUserInfo, ResGetDcUserInfo } from './v1/User/PtlGetDcUserInfo';
@@ -47,6 +48,10 @@ export interface ServiceType {
             req: ReqGetDcUserTestRulesNumber,
             res: ResGetDcUserTestRulesNumber
         },
+        "v1/User/GetDcNavUserToken": {
+            req: ReqGetDcNavUserToken,
+            res: ResGetDcNavUserToken
+        },
         "v1/User/GetDcUserAllGuilds": {
             req: ReqGetDcUserAllGuilds,
             res: ResGetDcUserAllGuilds
@@ -74,7 +79,7 @@ export interface ServiceType {
 }
 
 export const serviceProto: ServiceProto<ServiceType> = {
-    "version": 11,
+    "version": 12,
     "services": [
         {
             "id": 12,
@@ -114,6 +119,11 @@ export const serviceProto: ServiceProto<ServiceType> = {
         {
             "id": 16,
             "name": "v1/Test/GetDcUserTestRulesNumber",
+            "type": "api"
+        },
+        {
+            "id": 17,
+            "name": "v1/User/GetDcNavUserToken",
             "type": "api"
         },
         {
@@ -443,6 +453,37 @@ export const serviceProto: ServiceProto<ServiceType> = {
                     "name": "rules",
                     "type": {
                         "type": "String"
+                    }
+                }
+            ]
+        },
+        "v1/User/PtlGetDcNavUserToken/ReqGetDcNavUserToken": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "code",
+                    "type": {
+                        "type": "String"
+                    }
+                }
+            ]
+        },
+        "v1/User/PtlGetDcNavUserToken/ResGetDcNavUserToken": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "user_id",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "time",
+                    "type": {
+                        "type": "Date"
                     }
                 }
             ]
