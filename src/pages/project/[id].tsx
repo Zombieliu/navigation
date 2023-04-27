@@ -7,6 +7,7 @@ import {useEffect, useState} from "react";
 import {Jost} from "next/dist/compiled/@next/font/dist/google";
 import {useAtom} from "jotai";
 import {DiscordUser} from "../../jotai";
+import {https} from "../../constants";
 
 const Project = (props) =>{
     const [discordUser,setDiscordUser] =useAtom(DiscordUser)
@@ -243,7 +244,7 @@ const Project = (props) =>{
 
 export async function getStaticPaths() {
     let data = {}
-    const ret = await fetch('http://localhost:3001/v1/Project/GetAllProjectDetails',{
+    const ret = await fetch(`${https}/v1/Project/GetAllProjectDetails`,{
         method:'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -267,7 +268,7 @@ export async function getStaticProps({params:{id}}){
     let data = {
         id:id
     }
-    const ret = await fetch('http://localhost:3001/v1/Project/GetProjectDetails',{
+    const ret = await fetch(`${https}/v1/Project/GetProjectDetails`,{
         method:'POST',
         headers: {
             'Content-Type': 'application/json'

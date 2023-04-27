@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import {useRouter} from "next/router";
 import Home from "./home";
+import {https} from "../constants";
 
 const IndexPage: NextPage = (props) => {
     const router = useRouter()
@@ -15,7 +16,7 @@ export default IndexPage
 
 export async function getStaticProps(){
 
-    const ret = await fetch('http://localhost:3001/v1/Project/GetAllProjectDetails',{
+    const ret = await fetch(`${https}/v1/Project/GetAllProjectDetails`,{
         method:'POST',
         headers: {
             'Content-Type': 'application/json'
