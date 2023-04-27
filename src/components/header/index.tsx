@@ -133,6 +133,7 @@ const  Header = () =>{
     const signOut = () =>{
         setUserInfo(OPTIONS)
         setDiscordUser(OPTIONS)
+        router.push('')
     }
 
     return (
