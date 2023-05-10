@@ -1,5 +1,5 @@
 import Link from "next/link"
-import {Container} from "../../components/container";
+import {Container} from "../container";
 
 
 const ends =[
@@ -55,6 +55,10 @@ const ends =[
                 href:"",
             },
             {
+                h1:"Medium",
+                href:"",
+            },
+            {
                 h1:"Github",
                 href:"",
             }
@@ -65,20 +69,24 @@ const ends =[
 const participate=[
     {
         href:"",
-        img:"/Twitter.png",
+        img:"/twitter.svg",
     },
     {
         href:"",
-        img:"/discord.png",
+        img:"/discord.svg",
     },
-    // {
-    //     href:"",
-    //     img:"/telegram.png"
-    // },
-    // {
-    //     href:"",
-    //     img:"/medium.jpeg",
-    // }
+    {
+        href:"",
+        img:"/telegram.svg"
+    },
+    {
+        href:"",
+        img:"/medium.svg",
+    },
+    {
+        href:"",
+        img:"/github.svg",
+    }
 
 ]
 const Footer=()=>{
@@ -86,10 +94,9 @@ const Footer=()=>{
         <>
             <Container className="py-10 text-center">
                 <div className="md:flex justify-between pt-12 items-center">
-
                     <div className="text-center md:flex justify-between mb-10 mt-10 md:mt-0 ">
                         {ends.map(end=>(
-                            <div key={end.title} className="mx-10" >
+                            <div key={end.title} className="md:mr-20" >
                                 <div className="text-white font-semibold text-base ">
                                     {end.title}
                                 </div>
@@ -105,15 +112,16 @@ const Footer=()=>{
                             </div>
                         ))}
                     </div>
-
-                    <div>
-                        <div  className="flex justify-center md:justify-start " >
-                            <img className="w-18" src="/logo.svg" alt=""/>
+                </div>
+                <div className=" ">
+                    <div  className="flex justify-center md:justify-start">
+                        <img className="w-18" src="/logo.svg" alt=""/>
+                    </div>
+                    <div className=" mt-5 text-[#4F5568] text-sm  lg:text-left   md:flex justify-between">
+                        <div>
+                        2023 Copyright
                         </div>
-                        <div className="my-5 text-[#4F5568] text-sm  lg:text-left  ">
-                            2023 Copyright
-                        </div>
-                        <div className="flex justify-center items-center md:justify-start   ">
+                        <div className="flex justify-center items-center md:justify-start  mt-5 md:mt-0 ">
                             {participate.map(item=>(
                                 <div key={item.img} className="mr-5 ">
                                     <Link legacyBehavior href={item.href}>
@@ -123,6 +131,7 @@ const Footer=()=>{
                                 </div> ))}
                         </div>
                     </div>
+
                 </div>
             </Container>
         </>

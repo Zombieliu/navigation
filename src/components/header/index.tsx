@@ -50,9 +50,9 @@ const  Header = () =>{
     const [userInfo,setUserInfo] = useState(OPTIONS)
     const navigation = [
         {name:"Home", href:"/"},
-        // {name:"Game", href:"#work"},
-        {name:"Ranking", href:"/ranking"},
-        // {name:"News", href:"#team"},
+        {name:"Games", href:"/games"},
+        {name:"News", href:"/news"},
+        // {name:"Ranking", href:"/ranking"},
         // {name:"Airdrop", href:"#story"},
         // {name:"LaunchPad", href:"#work"},
         // {name:"MarketPlace", href:"#roadmap"},
@@ -79,23 +79,27 @@ const  Header = () =>{
 
             const queryData = async () =>{
                 if(discordUser.username ==''){
-                    const ret = await client.callApi('v1/User/GetDcNavUserToken', {
-                        code:`${code}`
-                    });
-                    if(ret.isSucc){
-                        const user_id = ret.res.user_id
-                        setUser_id(user_id)
-                        const userInfoRet = await client.callApi('v1/User/GetDcUserInfo', {
-                            user_id
+                    if(code){
+                        const ret = await client.callApi('v1/User/GetDcNavUserToken', {
+                            code:`${code}`
                         });
-                        const data = JSON.parse(userInfoRet.res.user_info)
+                        console.log('11',code)
+                        if(ret.isSucc){
+                            const user_id = ret.res.user_id
+                            setUser_id(user_id)
+                            const userInfoRet = await client.callApi('v1/User/GetDcUserInfo', {
+                                user_id
+                            });
+                            const data = JSON.parse(userInfoRet.res.user_info)
 
-                        setDiscordUser({id:data.id,username:data.username,avatar:data.avatar})
-                        setUserInfo({id:data.id,username:data.username,avatar:data.avatar})
-                        // setOpenLoading(false)
-                        // router.push({ pathname, query })
+                            setDiscordUser({id:data.id,username:data.username,avatar:data.avatar})
+                            setUserInfo({id:data.id,username:data.username,avatar:data.avatar})
+                            // setOpenLoading(false)
+                            // router.push("")
 
+                        }
                     }
+
                 }else{
                     setUserInfo(discordUser)
                 }

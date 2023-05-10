@@ -3,14 +3,10 @@ import {Footer} from "../../components/foot";
 import {Container} from "../../components/container";
 import Link from "next/link";
 import {client} from "../../client";
-import {useEffect, useState} from "react";
-import {Jost} from "next/dist/compiled/@next/font/dist/google";
-import {useAtom} from "jotai";
-import {DiscordUser} from "../../jotai";
+import React, {useEffect, useState} from "react";
 import {https} from "../../constants";
 
-const Project = (props) =>{
-    const [discordUser,setDiscordUser] =useAtom(DiscordUser)
+const New = (props) =>{
     const [numberData,setNumberData] = useState(false)
     const [number,setNumber] =useState('0')
     const [min_number,setMin_number] =useState('0')
@@ -52,28 +48,34 @@ const Project = (props) =>{
 
     },[])
 
-    const verify = async () =>{
-        if(discordUser.username !==""){
-            const ret = await client.callApi('v1/Test/AddDcUserTestRules', {
-                user_id: discordUser.id,
-                guild_id: JSON.parse(props.project_details).guildId
-
-            });
-                window.open(project.inviteLink,)
-        }else {
-            window.open('https://discord.com/oauth2/authorize?client_id=1085234510649622548&redirect_uri=http%3A%2F%2Flocalhost%3A3005%2F&response_type=code&scope=identify%20guilds',"_parent")
-        }
-    }
     return(
         <>
             <div className="bg-[#0B0B0B]">
                 <Header/>
                 <Container className="pt-24">
-                    <div className="flex mt-10 justify-between items-center ">
-                        <div>
-                    <div className="text-4xl text-white font-semibold ">
-                        {project.name}
+                    <div className="text-3xl mt-10 text-white font-semibold ">
+                        {'District 9'} Director Is Launching a Web3 Game—With a Dedicated Avalanche Subnet
                     </div>
+                    <div className="text-[#7A88AB] mt-2">
+                        Video game developer Gunzilla Games, which includes noted filmmaker Neill Blomkamp among its leadership,
+                    </div>
+                    <div className="flex mt-5 justify-between items-center ">
+                        <div>
+                            <div className="flex items-center">
+                                <img className="rounded-full w-12 h-12 mr-2" src="/logo.svg" alt=""/>
+                                <div>
+                                    <div className="flex items-center">
+                                        <div className="font-semibold mr-2 text-white">
+                                            Maya
+                                        </div>
+                                        {/*<div className="w-6 h-6 text-center bg-blue-400 rounded-full">*/}
+                                        {/*    <i className="fa fa-check " aria-hidden="true" />*/}
+                                        {/*</div>*/}
+
+                                    </div>
+                                </div>
+
+                            </div>
                             <div className="flex flex-wrap gap-4 mt-4">
                                 {project.type.map((item=>(
                                     <div key={item.content} className="text-[#639DEE] font-semibold border border-[#639DEE] text-sm px-4 py-1 bg-[#171920] rounded-lg text-center">
@@ -82,16 +84,12 @@ const Project = (props) =>{
                                 )))}
                             </div>
                         </div>
-                    <div className="flex ">
-                    <Link href={project.website} legacyBehavior>
-                        <a target="_blank" className="py-5 rounded-lg w-48 flex justify-center border h-12 text-white font-semibold items-center hover:bg-[#262626]" >
-                            WEBSITE
-                        </a>
-                    </Link>
-                    <button onClick={verify}  className="ml-5 rounded-lg w-48 flex justify-center border h-12 text-white font-semibold items-center hover:bg-[#262626]" >
-                        Verify
-                    </button>
-                    </div>
+                        <Link href="" className="flex justify-center gap-4 bg-[#5762E3] text-white w-60 py-3 rounded-xl font-[400]">
+
+                            <img src="/discord.svg" alt=""/>
+                            Join Discord
+
+                        </Link>
                     </div>
                     <div className="flex gap-10">
                         <div className="flex justify-between items-center py-4">
@@ -101,21 +99,6 @@ const Project = (props) =>{
                             <div className="flex gap-3">
                                 {project.platform.map(item=>(
                                     <img key={item.icon} className="w-5 h-5" src={item.icon} alt=""/>
-                                ))}
-                            </div>
-                        </div>
-
-
-                        <div className="flex justify-between items-center py-4">
-                            <div className="font-light text-[#7A88AB] text-md font-semibold mr-2">
-                                Community
-                            </div>
-                            <div className="flex gap-4">
-                                {project.community.map(item=>(
-                                    <a key={item.href} href={item.href}>
-                                        <img  className="w-5 h-5 " src={item.img} alt=""/>
-                                    </a>
-
                                 ))}
                             </div>
                         </div>
@@ -133,14 +116,6 @@ const Project = (props) =>{
                             </div>
                         </div>
 
-                        <div className="flex justify-between items-center py-4">
-                            <div className="font-light text-[#7A88AB] text-md font-semibold mr-2">
-                                Developers
-                            </div>
-                            <div className="flex gap-4 text-white">
-                                {project.builders}
-                            </div>
-                        </div>
 
                         <div className="flex justify-between items-center py-4">
                             <div className="font-light text-[#7A88AB] text-md font-semibold mr-2">
@@ -150,20 +125,14 @@ const Project = (props) =>{
                                 {project.status}
                             </div>
                         </div>
-                        <div className="flex justify-between items-center py-4">
-                            <div className="font-light text-[#7A88AB] text-md font-semibold mr-2">
-                                Number
-                            </div>
-                            <div className={numberData?"hidden":"animate-spin text-white"}>
-                                <i className="fa fa-spinner f-spin fa-2x fa-fw"></i>
-                            </div>
-                            <div className={numberData?"flex gap-4 text-white":"hidden"}>
-                                {min_number} / {number}
-                            </div>
-                        </div>
+
 
                     </div>
-                    <img  className="rounded-xl w-full xl:h-104"  src={project.img} alt=""/>
+                    <div className="text-[#7A88AB] flex border-b border-[#171920] pb-5 text-sm font-[420]">
+                        04-25 11:23
+                    </div>
+
+                    <img  className="rounded-xl w-full xl:h-104 mt-10"  src={project.img} alt=""/>
                     <div className="text-white text-xl my-5">
                         Introduction
                     </div>
@@ -221,4 +190,4 @@ export async function getStaticProps({params:{id}}){
     }
 }
 
-export  default Project
+export  default New
